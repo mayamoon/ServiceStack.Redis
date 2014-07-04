@@ -1086,6 +1086,8 @@ namespace ServiceStack.Redis
             {
                 cmdWithArgs.Add(Commands.Store);
                 cmdWithArgs.Add(sortOptions.StoreAtKey.ToUtf8Bytes());
+                var val = SendExpectLong(cmdWithArgs.ToArray());
+                return new byte[][] { val.ToString().ToUtf8Bytes() };
             }
 
             return SendExpectMultiData(cmdWithArgs.ToArray());
